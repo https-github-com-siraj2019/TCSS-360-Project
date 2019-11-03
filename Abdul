@@ -1,4 +1,5 @@
-//About PopUp UI
+// Java Program to create a pop up and display 
+// it on a parent frame 
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*; 
