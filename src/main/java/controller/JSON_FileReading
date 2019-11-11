@@ -1,0 +1,63 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+ 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+ 
+public class FileReading 
+{
+    @SuppressWarnings("unchecked")
+    public static void main(String[] args) 
+    {
+        //JSON parser object to parse read file
+        JSONParser jsonParser = new JSONParser();
+         
+        try (FileReader reader = new FileReader("Test.json"))
+        {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+ 
+            JSONArray productList = (JSONArray) obj;
+            System.out.println(productList);
+             
+            //Iterate over product array
+            productList.forEach( pro -> parseproductObject( (JSONObject) pro ) );
+ 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+ 
+    private static void parseproductObject(JSONObject product) 
+    {
+        //Get product object within list
+        JSONObject productObject = (JSONObject) product.get("product");
+         
+        //Get product id name
+        String id = (String) productObject.get("ID");    
+        System.out.println(id);
+         
+        //Get product name
+        String Name = (String) productObject.get("name");  
+        System.out.println(Name);
+         
+        //Get product value name
+        String value = (String) productObject.get("value");    
+        System.out.println(value);
+        
+//        //Get product description name
+//        String desc = (String) productObject.get("description");    
+//        System.out.println(desc);
+        
+        //Get product export name
+        String exprt = (String) productObject.get("exportable");    
+        System.out.println(exprt);
+    }
+}

@@ -1,0 +1,50 @@
+
+import java.io.FileWriter;
+import java.io.IOException;
+ 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+ 
+public class FileWriting
+{
+    @SuppressWarnings("unchecked")
+    public static void main( String[] args )
+    {
+        //First Product
+        JSONObject ProductDetails = new JSONObject();
+        ProductDetails.put("ID", "001");
+        ProductDetails.put("name", "Samsung TV");
+        ProductDetails.put("value", "$$$$");
+        //ProductDetails.put("description", "description");
+        ProductDetails.put("exportable", "true");
+         
+        JSONObject productObject = new JSONObject(); 
+        productObject.put("product", ProductDetails);
+         
+        //Second Product
+        JSONObject ProductDetails2 = new JSONObject();
+        ProductDetails2.put("ID", "002");
+        ProductDetails2.put("name", "Refrigerator");
+        ProductDetails2.put("value", "$$$$");
+      //  ProductDetails2.put("description", "description");
+        ProductDetails2.put("exportable", "true");
+         
+        JSONObject productObject2 = new JSONObject(); 
+        productObject2.put("product", ProductDetails2);
+         
+        //Add Product to list
+        JSONArray ProductList = new JSONArray();
+        ProductList.add(productObject);
+        ProductList.add(productObject2);
+         
+        //Write JSON file
+        try (FileWriter file = new FileWriter("/Users/Abdulfetah/Desktop/Test.json")) {
+ 
+            file.write(ProductList.toJSONString());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

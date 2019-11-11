@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="db-derby-10.15.1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/db-derby-10.15.1.3-bin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

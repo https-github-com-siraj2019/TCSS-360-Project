@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.BorderPane" fx:controller="main.java.ui.MainUI" minHeight="-1.0" minWidth="-1.0" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <center>
+    <VBox prefHeight="200.0" prefWidth="100.0">
+      <children>
+        <Pane prefHeight="-1.0" prefWidth="-1.0">
+          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="5.0" text="Document Viewer" />
+          </children>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </padding>
+        </Pane>
+        <ListView maxHeight="1.7976931348623157E308" prefHeight="540.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" />
+      </children>
+    </VBox>
+  </center>
+  <left>
+    <VBox minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <Pane prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="NEVER">
+          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="5.0" text="Folders" />
+          </children>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </padding>
+          <VBox.margin>
+            <Insets />
+          </VBox.margin>
+        </Pane>
+        <TreeView maxHeight="1.7976931348623157E308" prefHeight="540.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" />
+      </children>
+    </VBox>
+  </left>
+  <right>
+    <SplitPane dividerPositions="0.5035211267605634" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab text="Tags">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab text="Options">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </right>
+  <top>
+    <MenuBar>
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
+</fx:root>
