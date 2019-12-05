@@ -1,10 +1,6 @@
 package main.java.model;
 
-import java.util.UUID;
-
 public class Filter {
-    private UUID ID;
-    private String name;
     private String description;
     private boolean included;
     private String regex;
@@ -26,27 +22,4 @@ public class Filter {
         this.regex = regex;
     }
 
-    public UUID getID() {
-        return ID;
-    }
-
-    private void generateID() {
-        this.ID = UUID.randomUUID();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

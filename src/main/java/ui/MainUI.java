@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * The root UI element of the main application.
+ */
 public class MainUI extends Application {
 
     private Stage primaryStage;
@@ -17,19 +20,18 @@ public class MainUI extends Application {
     private MainMenuUI mainMenu;
 
     /**
+     * Launches UI
      * Sample taken from:
      * https://www.swtestacademy.com/getting-started-with-javafx/
      *
-     *
-     * Args expected:
-     * 0    Program Title
-     * 1
      */
     public void main(String[] args) {
-
         launch(args);
     }
 
+    /**
+     * Sets initial UI parameters not contained within the Settings controller.
+     */
     private void initUIVariables() {
         // Sets program title
         this.programTitle = "Document Management";
@@ -37,8 +39,10 @@ public class MainUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // initializes UI parameters
         initUIVariables();
 
+        // Creates a new UI stage
         this.primaryStage = primaryStage;
 
         //Creates and initializes the main program window.
@@ -47,11 +51,13 @@ public class MainUI extends Application {
         //Creates a frame in the primary stage
         initRootLayout();
 
+        // Main doc view pane
+        initDocumentView();
+
 
         // Main Menu.
         // Must be before any element that adds a menu item.
         initMainMenu();
-
         ArrayList<Menu> rootMenus = new ArrayList<Menu>();
 
         // File Menu
@@ -69,14 +75,10 @@ public class MainUI extends Application {
             this.mainMenu.addMenu(menu);
         }
 
+        // Initialize menus
+        new HelpMenuUI(helpMenu);
+        new FileMenuUI(fileMenu);
 
-        // Creates About Popup.
-        AboutUI about = new AboutUI();
-        about.initMenu(helpMenu);
-
-        // Creates Settings Popup.
-        SettingsUI settings = new SettingsUI();
-        settings.initMenu(fileMenu);
 
 
         primaryStage.show();
@@ -88,7 +90,9 @@ public class MainUI extends Application {
         primaryStage.setTitle(programTitle);
     }
 
-
+    /**
+     * Loads root layout from rootBorder.fxml file.
+     */
     private void initRootLayout() {
         try {
             //Load xml layout into rootLayout pane
@@ -110,21 +114,21 @@ public class MainUI extends Application {
 
     }
 
-    private void initRootBorder() {
-        this.rootBorder.setPrefHeight(600);
-        this.rootBorder.setPrefWidth(800);
-        this.rootBorder.setMinHeight(600);
-        this.rootBorder.setMinWidth(800);
-    }
-
+    /**
+     * Adds main menu to root border top.
+     */
     private void initMainMenu() {
         MainMenuUI menu = new MainMenuUI();
         menu.start(rootBorder);
         this.mainMenu = menu;
     }
 
-    private void initMenu(Menu rootMenu) {
-
+    /**
+     * Adds document view table to root border center.
+     */
+    private void initDocumentView() {
+        ViewUI viewUI = new ViewUI();
+        viewUI.start(this.rootBorder);
     }
 }
 

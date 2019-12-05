@@ -9,6 +9,9 @@ import javafx.scene.layout.VBox;
 import java.util.LinkedList;
 import java.util.Objects;
 
+/**
+ * Contains the main menu bar items as well as methods to add menus to the menu bar.
+ */
 public class MainMenuUI {
 
     MenuBar menubar;
@@ -23,15 +26,8 @@ public class MainMenuUI {
         primaryPane.setTop(box);
     }
 
-    public void addMenu(Menu menu){
+    void addMenu(Menu menu){
         this.menubar.getMenus().add(Objects.requireNonNull(menu));
     }
 
-    public void addMenuItem(Menu menu, MenuItem item) {
-        try {
-            menu.getItems().add(Objects.requireNonNull(item));
-        } catch (Exception e) {
-            //TODO: Create error logging
-        }
-    }
 }

@@ -130,6 +130,7 @@ public class SettingsUI extends Application implements MenuItemInterface {
         rootPane.setBottom(buttonBar);
     }
 
+    @Override
     public void initMenu(Menu rootMenu) {
         MenuItem aboutMenuItem = new MenuItem("Settings");
         aboutMenuItem.setOnAction(new EventHandler<ActionEvent>() {
