@@ -19,7 +19,6 @@ import main.java.controller.DocumentHandler;
 import main.java.model.Document;
 import main.java.model.FileEntity;
 import main.java.model.Setting;
-import main.java.model.Tag;
 
 import java.awt.*;
 import java.io.IOException;
@@ -35,7 +34,6 @@ public class ViewUI{
 
     private DocumentHandler docHandler;
     private TableView<Document> viewList;
-    private ObservableSet<Tag> colTags;
     private ObservableSet<TableColumn> colSet;
     private ObservableList<Document> selectedDocuments;
     private ContextMenu contextMenu;
@@ -46,7 +44,6 @@ public class ViewUI{
      */
     public void start(BorderPane rootPane) {
         this.docHandler = Controllers.documentHandler;
-        this.colTags = FXCollections.observableSet();
         this.colSet = FXCollections.observableSet();
         this.selectedDocuments = FXCollections.observableArrayList();
         this.contextMenu = new ContextMenu();
@@ -93,6 +90,7 @@ public class ViewUI{
 
             // Adds right click menu
             viewList.setContextMenu(contextMenu);
+            initContextMenu();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +111,6 @@ public class ViewUI{
         if (settingColumns.getValue().isEmpty()) {
             settingColumns.getValue().addAll(Controllers.tagHandler.getTagSetRequiredFileEntity());
         }
-        this.colTags = (ObservableSet<Tag>) settingColumns.getValue();
     }
 
     /**
@@ -154,9 +151,17 @@ public class ViewUI{
         projectColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FileEntity, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FileEntity, String> cellEditEvent) {
-                cellEditEvent.getTableView().getItems().get(
-                        cellEditEvent.getTablePosition().getRow())
-                        .setName(cellEditEvent.getNewValue());
+                Document entity = (Document) cellEditEvent.getTableView().getItems().get(
+                        cellEditEvent.getTablePosition().getRow());
+                String newTag = entity.projectProperty().getValue();
+                if (newTag != null) {
+                    newTag = cellEditEvent.getNewValue();
+                } else {
+                    newTag = cellEditEvent.getNewValue();
+                }
+
+                entity.projectProperty().setValue(newTag);
+
             }
         });
         viewList.getColumns().add(projectColumn);
@@ -168,13 +173,9 @@ public class ViewUI{
         MenuItem exportChoice = new MenuItem("Export...");
         MenuItem openChoice = new MenuItem("Open");
 
-        importChoice.setOnAction(e -> {
-            new ImportFileDialogAction(null);
-        });
+        importChoice.addEventHandler(ActionEvent.ACTION, new ImportFileDialogAction(null));
 
-        exportChoice.setOnAction(e -> {
-            new ExportFileDialogAction();
-        });
+        exportChoice.addEventHandler(ActionEvent.ACTION, new ExportFileDialogAction());
 
         openChoice.setOnAction(new EventHandler<ActionEvent>() {
             @Override

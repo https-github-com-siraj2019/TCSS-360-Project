@@ -64,14 +64,6 @@ public class Setting<T> implements Comparable<Setting> {
 
     }
 
-    public boolean isExportable() {
-        return exportable;
-    }
-
-    public void setExportable(boolean exportable) {
-        this.exportable = exportable;
-    }
-
     @Override
     public int compareTo(Setting o) {
         return this.ID.compareTo(o.getID());

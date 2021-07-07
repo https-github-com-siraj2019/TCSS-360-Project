@@ -1,19 +1,13 @@
 ----------------------------------------------------------------
-Wed Nov 06 14:41:12 PST 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-016e-42e1-0021-00000f428598 
-on database directory C:\Users\lchristensen\git\UW\TCSS-360-Project\derbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@77556fd 
-Loaded from file:/C:/Users/lchristensen/git/UW/TCSS-360-Project/resources/db-derby-10.15.1.3-bin/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=11.0.1+13-LTS
-user.dir=C:\Users\lchristensen\git\UW\TCSS-360-Project
+Thu Dec 12 17:58:17 PST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-016e-fcfa-5f03-00000f200000 
+on database directory C:\Users\leifc\IdeaProjects\TCSS-360-Project\derbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@78308db1 
+Loaded from file:/C:/Users/leifc/IdeaProjects/TCSS-360-Project/lib/db-derby-10.15.1.3-bin/lib/derby.jar
+java.vendor=JetBrains s.r.o
+java.runtime.version=11.0.4+10-b304.77
+user.dir=C:\Users\leifc\IdeaProjects\TCSS-360-Project
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Wed Nov 06 14:41:14 PST 2019: Shutting down Derby engine
-----------------------------------------------------------------
-Wed Nov 06 14:41:14 PST 2019:
-Shutting down instance a816c00e-016e-42e1-0021-00000f428598 on database directory C:\Users\lchristensen\git\UW\TCSS-360-Project\derbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@77556fd 
-----------------------------------------------------------------

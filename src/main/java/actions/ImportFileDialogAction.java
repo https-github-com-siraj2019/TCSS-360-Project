@@ -17,7 +17,7 @@ import java.io.File;
 public class ImportFileDialogAction implements EventHandler {
 
 
-    File toRead;
+    File[] toRead;
     Folder destFolder;
 
     public ImportFileDialogAction(Folder destFolder) {
@@ -27,12 +27,17 @@ public class ImportFileDialogAction implements EventHandler {
     @Override
     public void handle(Event event) {
         JFileChooser fileToImportDialog = new JFileChooser();
-
+        fileToImportDialog.setMultiSelectionEnabled(true);
 
         int openedFile = fileToImportDialog.showOpenDialog(null);
         if(openedFile == JFileChooser.APPROVE_OPTION) {
-            toRead = fileToImportDialog.getSelectedFile();
+            toRead = fileToImportDialog.getSelectedFiles();
+            for (File f: toRead
+                 ) {
+                Controllers.documentHandler.importDocument(f.getName(), f, destFolder);
+            }
+
         }
-        Controllers.documentHandler.importDocument(toRead.getName(), toRead, destFolder);
+
     }
 }

@@ -9,6 +9,7 @@ import main.java.controller.Controllers;
 import java.io.File;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Documents are a type of File Entity that points to a particular file.
@@ -16,7 +17,7 @@ import java.util.Optional;
  * Only one file can be represented in each document.
  */
 public class Document extends FileEntity {
-
+    private Document self = this;
     private File file;
 
     /**
@@ -33,10 +34,18 @@ public class Document extends FileEntity {
         this.initTags();
     }
 
+    public Document(String name, File file, UUID id) {
+        super(name, null, id);
+        this.file = file;
+        this.setTags(Controllers.tagHandler.getTagSetRequiredDocument());
+        this.initTags();
+    }
+
     @Override
     protected void initTags() {
         super.initTags();
         this.getTag("File").setValue(this.file);
+
     }
 
     /**
@@ -56,6 +65,7 @@ public class Document extends FileEntity {
     public void setFile(File file) {
         this.file = Objects.requireNonNull(file);
         this.getTag("File").setValue(this.file);
+        //Controllers.dataSourceHandler.updateDocument(this);
     }
 
     /**
@@ -133,10 +143,10 @@ public class Document extends FileEntity {
         };
     }
 
-    public Property<Tag<String>> projectProperty() {
-        return new Property<Tag<String>>() {
+    public Property<String> projectProperty() {
+        return new Property<String>() {
             @Override
-            public void bind(ObservableValue<? extends Tag<String>> observableValue) {
+            public void bind(ObservableValue<? extends String> observableValue) {
 
             }
 
@@ -151,14 +161,15 @@ public class Document extends FileEntity {
             }
 
             @Override
-            public void bindBidirectional(Property<Tag<String>> property) {
+            public void bindBidirectional(Property<String> property) {
 
             }
 
             @Override
-            public void unbindBidirectional(Property<Tag<String>> property) {
+            public void unbindBidirectional(Property<String> property) {
 
             }
+
 
             @Override
             public Object getBean() {
@@ -170,21 +181,26 @@ public class Document extends FileEntity {
                 return "property";
             }
 
+
             @Override
-            public void addListener(ChangeListener<? super Tag<String>> changeListener) {
+            public void addListener(ChangeListener<? super String> changeListener) {
 
             }
 
             @Override
-            public void removeListener(ChangeListener<? super Tag<String>> changeListener) {
+            public void removeListener(ChangeListener<? super String> changeListener) {
 
             }
 
             @Override
-            public Tag<String> getValue() {
+            public String getValue() {
                 Optional<Tag> returnTag = tags.stream().filter(t -> t.getName().compareToIgnoreCase("project")==0).findFirst();
                 if(returnTag.isPresent()) {
-                    return returnTag.get();
+                    Object val = returnTag.get().getValue();
+                    if ( val == null) {
+                        return "";
+                    }
+                    return val.toString();
                 } else {
                     return null;
                 }
@@ -202,8 +218,18 @@ public class Document extends FileEntity {
             }
 
             @Override
-            public void setValue(Tag<String> stringTag) {
+            public void setValue(String stringTag) {
+                Optional<Tag> returnTag = tags.stream().filter(t -> t.getName().compareToIgnoreCase("project")==0).findFirst();
+                if(returnTag.isPresent()) {
+                    returnTag.get().setValue(stringTag);
 
+                    Controllers.dataSourceHandler.updateDocument(self);
+                } else {
+                    self.getTags().add(new Tag<String>("project", stringTag));
+                    //Controllers.dataSourceHandler.updateDocument(self);
+                }
+
+                System.out.println("Beginning tag update");
             }
         };
     }

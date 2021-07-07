@@ -8,10 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import main.java.controller.Controllers;
 
-import java.util.Date;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -52,8 +49,8 @@ public class FileEntity {
         this.name = name;
         this.parentFolder = parent;
         this.tags = FXCollections.observableSet();
-        // Sets initial tags from tag handler required tags.
         this.setTags(Controllers.tagHandler.getTagSetRequiredFileEntity());
+        this.createdDate = new Date(System.currentTimeMillis());
     }
 
     /**
@@ -96,7 +93,13 @@ public class FileEntity {
      */
     public Tag getTag(String name){
         Stream<Tag> filter = this.tags.stream().filter(t -> t.getName().compareToIgnoreCase(name)==0);
-        return filter.findFirst().get();
+        Optional<Tag> tag = filter.findFirst();
+        if (tag.isPresent()){
+            return tag.get();
+        } else {
+            return null;
+        }
+
     }
 
     /**

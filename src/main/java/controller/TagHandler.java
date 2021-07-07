@@ -37,6 +37,7 @@ public class TagHandler {
 
         requiredTagSet.add(new Tag<File>("File", null));
         requiredTagSet.add(new Tag<Date>("CreatedDate", null));
+
         // Tags added above here will be added to the required tags for Documents
         this.tagSetRequiredDocument.addAll(Objects.requireNonNull(this.requiredTagSet));
 

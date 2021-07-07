@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 class SettingsHandlerTest {
 
     SettingsHandler handler;
-    Setting setting0;
+    Setting<String> setting0;
 
     @BeforeEach
     void setUp() {
         this.handler = new SettingsHandler();
-        setting0 = new Setting("TEST", "VAL1");
+        setting0 = new Setting<String>("TEST", "VAL1");
     }
 
     @Test

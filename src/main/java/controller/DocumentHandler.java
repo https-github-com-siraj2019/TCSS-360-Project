@@ -18,7 +18,14 @@ public class DocumentHandler {
      * Creates a new, empty document list.
      */
     public DocumentHandler() {
-        this.documentSet = FXCollections.observableArrayList();
+
+        try {
+            this.documentSet = FXCollections.observableArrayList(Controllers.dataSourceHandler.getDocuments()) ;
+            System.out.println("Database documents restored: " + this.documentSet.size());
+        } catch (Exception e) {
+            System.out.println("Database not loaded, starting non-permanent list." + e.getMessage());
+            this.documentSet = FXCollections.observableArrayList();
+        }
     }
 
     /**
@@ -34,11 +41,18 @@ public class DocumentHandler {
      * @param document Doc to add
      */
     public void addDocument(Document document) {
-        this.documentSet.add(document);
+        try {
+            this.documentSet.add(document);
+            Controllers.dataSourceHandler.addDocument(document);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
-     * REmvoes a document from the master list of it exists in the list.
+     * Remvoes a document from the master list of it exists in the list.
      * @param document Doc to remove
      */
     public void removeDocument(Document document) {
@@ -56,7 +70,7 @@ public class DocumentHandler {
             if(!file.exists() || !file.canRead() || file.isDirectory()) {
                 throw new IllegalAccessException();
             } else {
-                this.documentSet.add(new Document(name, file, parent));
+                this.addDocument(new Document(name, file, parent));
             }
 
         } catch (Exception e) {
